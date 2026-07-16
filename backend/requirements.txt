@@ -41,4 +41,8 @@ typing-inspection==0.4.2
 typing_extensions==4.16.0
 tzdata==2026.3
 Werkzeug==3.1.8
+<<<<<<< HEAD
 flask-cors==4.0.0
+=======
+flask-cors==4.0.0
+>>>>>>> 0b772c6c6a057304ce525eabaa57852e60359998
