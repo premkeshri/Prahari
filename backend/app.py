@@ -10,7 +10,7 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-# ── Load data ──
+
 with open("employees.json") as f:
     DATA = json.load(f)
 
@@ -19,7 +19,7 @@ HONEYPOTS  = DATA["honeypot_files"]
 TRAJECTORY = DATA["risk_trajectory"]
 COLLUSION  = DATA["collusion_pairs"]
 
-# ── In-memory stores ──
+
 AUDIT_LOG = [
     {"time": "02:14", "action": "EMP1003 login from unknown device via VPN", "severity": "WARNING", "by": "SYSTEM"},
     {"time": "02:17", "action": "EMP1003 bulk export — 847 customer records", "severity": "CRITICAL", "by": "SYSTEM"},
@@ -177,30 +177,20 @@ SECTION 3 — RECOMMENDED ACTIONS:
 5. Preserve all USB and system logs as forensic evidence
 6. File RBI Fraud Report — CSF 2016 Section 4.2 within 6 hours"""
 
-# ═══════════════════════════
-# ENDPOINT 4 — GET honeypots
-# ═══════════════════════════
 @app.route("/api/honeypots", methods=["GET"])
 def get_honeypots():
     return jsonify(HONEYPOTS)
 
-# ═══════════════════════════
-# ENDPOINT 5 — GET collusion
-# ═══════════════════════════
+
 @app.route("/api/collusion", methods=["GET"])
 def get_collusion():
     return jsonify(COLLUSION)
 
-# ═══════════════════════════
-# ENDPOINT 6 — GET audit log
-# ═══════════════════════════
 @app.route("/api/audit", methods=["GET"])
 def get_audit():
     return jsonify(list(reversed(AUDIT_LOG)))
 
-# ═══════════════════════════
-# ENDPOINT 7 — POST freeze (SOC-gated)
-# ═══════════════════════════
+
 @app.route("/api/freeze/<emp_id>", methods=["POST"])
 def freeze_access(emp_id):
     emp = next((e for e in EMPLOYEES if e["id"] == emp_id), None)
@@ -241,9 +231,6 @@ def get_trajectory(emp_id):
         trajectory = [max(0, min(100, base + random.randint(-4, 4))) for _ in range(30)]
     return jsonify({"trajectory": trajectory})
 
-# ═══════════════════════════
-# ENDPOINT 9 — POST dual auth request
-# ═══════════════════════════
 @app.route("/api/dual-auth/request", methods=["POST"])
 def dual_auth_request():
     data   = request.json
@@ -270,9 +257,6 @@ def dual_auth_request():
         "received_approvals": ["CISO"]
     })
 
-# ═══════════════════════════
-# ENDPOINT 10 — POST whistleblower
-# ═══════════════════════════
 @app.route("/api/whistleblower", methods=["POST"])
 def whistleblower():
     data = request.json
@@ -298,9 +282,7 @@ def whistleblower():
         "status": "FORWARDED_TO_BOARD"
     })
 
-# ═══════════════════════════
-# ENDPOINT 11 — GET CISO security status
-# ═══════════════════════════
+
 @app.route("/api/ciso-security", methods=["GET"])
 def ciso_security():
     ciso = next((e for e in EMPLOYEES if e.get("role") == "CISO"), None)
@@ -352,9 +334,7 @@ def ciso_security():
         "last_rbi_report": "2026-07-06 09:00 IST",
     })
 
-# ═══════════════════════════
-# ENDPOINT 12 — GET branches rollup
-# ═══════════════════════════
+
 @app.route("/api/branches", methods=["GET"])
 def get_branches():
     branches = {}
@@ -371,9 +351,7 @@ def get_branches():
             branches[branch]["top_threat"] = emp.get("name")
     return jsonify(list(branches.values()))
 
-# ═══════════════════════════
-# ENDPOINT 13 — GET incident report data (for PDF)
-# ═══════════════════════════
+
 @app.route("/api/incident-report/<emp_id>", methods=["GET"])
 def incident_report(emp_id):
     emp = next((e for e in EMPLOYEES if e["id"] == emp_id), None)
@@ -395,9 +373,6 @@ def incident_report(emp_id):
         "report_ref": f"PRAHARI-INC-{emp_id}-{datetime.now().strftime('%Y%m%d')}",
     })
 
-# ═══════════════════════════
-# ENDPOINT 14 — Health check
-# ═══════════════════════════
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
