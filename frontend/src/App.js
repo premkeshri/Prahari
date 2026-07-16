@@ -49,7 +49,7 @@ const CSS = `
   .spin-icon { animation: spin 0.8s linear infinite; }
 `;
 
-// ── Animated Counter ──
+
 function AnimCounter({ value, color, size = 22 }) {
   const [n, setN] = useState(0);
   useEffect(() => {
@@ -64,7 +64,7 @@ function AnimCounter({ value, color, size = 22 }) {
   return <span style={{ color, fontSize: size, fontWeight: 800, fontFamily: FONT_MONO }}>{n}</span>;
 }
 
-// ── Typewriter ──
+
 function TypeWriter({ text, speed = 10 }) {
   const [d, setD] = useState('');
   useEffect(() => {
@@ -75,7 +75,7 @@ function TypeWriter({ text, speed = 10 }) {
   return <span style={{ fontFamily: FONT_MONO }}>{d}<span style={{ color: '#3D5872', animation: 'pulse 1s infinite' }}>▍</span></span>;
 }
 
-// ── Live Clock ──
+
 function LiveClock() {
   const [t, setT] = useState(new Date());
   useEffect(() => { const i = setInterval(() => setT(new Date()), 1000); return () => clearInterval(i); }, []);
@@ -91,7 +91,7 @@ function LiveClock() {
   );
 }
 
-// ── Risk Ring ──
+
 function RiskRing({ score, size = 64 }) {
   const sev = score >= 76 ? 'CRITICAL' : score >= 51 ? 'ALERT' : score >= 31 ? 'WATCH' : 'NORMAL';
   const color = SEV[sev].dot;
@@ -114,7 +114,7 @@ function RiskRing({ score, size = 64 }) {
   );
 }
 
-// ── Sparkline ──
+
 function Sparkline({ data, color }) {
   if (!data || data.length < 2) return null;
   const chartData = data.map((v, i) => ({ i, v }));
@@ -133,7 +133,7 @@ function Sparkline({ data, color }) {
   );
 }
 
-// ── Login Screen ──
+
 function LoginScreen({ onLogin }) {
   const [role, setRole] = useState('');
   const [pass, setPass] = useState('');
@@ -206,7 +206,7 @@ function LoginScreen({ onLogin }) {
   );
 }
 
-// ── Employee Card ──
+
 function EmployeeCard({ emp, selected, onClick, trajectory, currentUser }) {
   const cfg = SEV[emp.severity];
   const trend = trajectory && trajectory.length >= 7 ? trajectory[trajectory.length-1] - trajectory[trajectory.length-7] : 0;
@@ -260,7 +260,7 @@ function EmployeeCard({ emp, selected, onClick, trajectory, currentUser }) {
   );
 }
 
-// ── Trajectory Chart ──
+
 function TrajectoryChart({ data }) {
   if (!data || data.length === 0) return null;
   const last  = data[data.length-1];
@@ -290,7 +290,7 @@ function TrajectoryChart({ data }) {
   );
 }
 
-// ── Attack Timeline ──
+
 function AttackTimeline({ events }) {
   const [vis, setVis] = useState(0);
   useEffect(() => {
@@ -325,7 +325,7 @@ function AttackTimeline({ events }) {
   );
 }
 
-// ── Score Breakdown ──
+
 function ScoreBreakdown({ breakdown }) {
   if (!breakdown || !Object.keys(breakdown).length) return null;
   const total = Object.values(breakdown).reduce((a, b) => a+b, 0);
@@ -352,7 +352,7 @@ function ScoreBreakdown({ breakdown }) {
   );
 }
 
-// ── Zero Trust ──
+
 function ZeroTrust({ score, breakdown }) {
   const color = score >= 70 ? '#22C55E' : score >= 40 ? '#F59E0B' : '#EF4444';
   const label = score >= 70 ? 'HIGH TRUST — Verified' : score >= 40 ? 'MEDIUM TRUST — MFA Required' : 'LOW TRUST — Flagged';
@@ -380,7 +380,7 @@ function ZeroTrust({ score, breakdown }) {
   );
 }
 
-// ── Tags ──
+
 function TagsPanel({ mitre, compliance }) {
   if (!mitre?.length && !compliance?.length) return null;
   return (
@@ -405,7 +405,7 @@ function TagsPanel({ mitre, compliance }) {
   );
 }
 
-// ── Freeze Checklist Modal ──
+
 function FreezeModal({ emp, currentUser, onClose, onFreeze }) {
   const CHECKLIST = [
     'Terminate active session immediately',
@@ -589,7 +589,7 @@ function InvestigatePanel({ emp, currentUser, onFreezeClick }) {
   );
 }
 
-// ── Honeypot Panel ──
+
 function HoneypotPanel({ honeypots }) {
   return (
     <div>
@@ -626,11 +626,11 @@ function HoneypotPanel({ honeypots }) {
   );
 }
 
-// ── Alert Feed ──
+
 function AlertFeed({ employees, currentUser }) {
   const alerts = employees.filter(e => e.severity !== 'NORMAL').sort((a,b) => b.risk_score - a.risk_score);
 
-  // MD sees CISO alerts too
+  
   const cisoAlert = currentUser?.role === 'md' ? {
     id: 'CISO-001', name: 'Kavya Menon (CISO)', role: 'CISO · HQ Mumbai',
     severity: 'WATCH', risk_score: 11, mitre_tags: [], compliance_tags: [],
@@ -678,7 +678,7 @@ function AlertFeed({ employees, currentUser }) {
   );
 }
 
-// ── Audit Log ──
+
 function AuditLog({ logs }) {
   const [selected, setSelected] = useState(null);
   return (
@@ -730,7 +730,7 @@ function AuditLog({ logs }) {
   );
 }
 
-// ── Collusion Panel ──
+
 function CollusionPanel({ pairs, employees, onViewEmployee }) {
   const [selected, setSelected] = useState(null);
   if (!pairs?.length) return (
@@ -818,7 +818,7 @@ function CollusionPanel({ pairs, employees, onViewEmployee }) {
   );
 }
 
-// ── CISO Security ──
+
 function CISOPanel({ cisoData, onWhistleblower, currentUser }) {
   const [wbMsg, setWbMsg]       = useState('');
   const [wbSent, setWbSent]     = useState(false);
@@ -917,7 +917,7 @@ function CISOPanel({ cisoData, onWhistleblower, currentUser }) {
   );
 }
 
-// ── Branches Panel ──
+
 function BranchesPanel({ branches, employees, onSelectEmployee }) {
   const [selectedBranch, setSelectedBranch] = useState(null);
 
@@ -1000,7 +1000,6 @@ function BranchesPanel({ branches, employees, onSelectEmployee }) {
   );
 }
 
-// ── RBI Reports Panel ──
 function RBIReportsPanel({ rbiData }) {
   if (!rbiData) return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#64748B', padding: 20 }}>
@@ -1087,8 +1086,7 @@ function RBIReportsPanel({ rbiData }) {
   );
 }
 
-// ══ MAIN APP CONTINUATION ══
-// Paste this AFTER App_final_v4.js content in App.js
+
 
 export default function App() {
   const [currentUser,  setCurrentUser]  = useState(null);
