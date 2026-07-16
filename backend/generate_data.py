@@ -1,8 +1,7 @@
 import json
 import random
  
-# ── Mock Indian bank employee data for PRAHARI ──
- 
+
 employees = [
     {
         "id": "EMP1001",
