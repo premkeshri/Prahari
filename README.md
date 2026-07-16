@@ -1,5 +1,5 @@
-# 🛡 PRAHARI
-### Predictive Risk and Access Hazard Intelligence
+PRAHARI
+## Predictive Risk and Access Hazard Intelligence
 
 > *"PRAHARI detected this in minutes. PNB took 7 years."*
 
@@ -8,22 +8,22 @@ https://drive.google.com/drive/folders/15eOKH85ZwcZpnhiuJOKoyBEitkO42UxQ?usp=sha
 
 ---
 
-## 🎯 What is PRAHARI?
+##  What is PRAHARI?
 
 PRAHARI is an AI-powered **Insider Threat Detection Platform** built for Indian banking. It detects privileged access misuse by monitoring employee *behaviour* — not just credentials — and alerts SOC teams before fraud occurs.
 
 | Metric | Value |
 |--------|-------|
-| 🏦 Target | Bank of Maharashtra — 2,500+ branches |
-| 👥 Employees Monitored | 50,000+ (prototype: 10 mock employees) |
-| 📊 Fraud Exposure | Rs.36,014 Cr (RBI FY25 data) |
-| ⚡ Detection Time | Minutes (PNB took 7 years) |
-| 🎯 False Positive Rate | Zero (Honeypot layer) |
-| 📋 Compliance | RBI CSF 2016 · ISO 27001 · CERT-In · DPDP 2023 |
+|  Target | Bank of Maharashtra — 2,500+ branches |
+|  Employees Monitored | 50,000+ (prototype: 10 mock employees) |
+|  Fraud Exposure | Rs.36,014 Cr (RBI FY25 data) |
+| Detection Time | Minutes (PNB took 7 years) |
+|  False Positive Rate | Zero (Honeypot layer) |
+|  Compliance | RBI CSF 2016 · ISO 27001 · CERT-In · DPDP 2023 |
 
 ---
 
-## 🚨 The Problem
+##  The Problem
 
 Banks today ask: **"Is the password correct?"**
 
@@ -40,15 +40,15 @@ Rs.590 Cr     →  IDFC First — branch employee fraud
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🪤 Honeypot Deception Layer
+###  Honeypot Deception Layer
 Decoy files planted in privileged directories (`BOM_CEO_Salary_2026.xlsx`, `Customer_PAN_Database_Backup.csv`). Any access = **instant CRITICAL alert**. Zero false positives — guaranteed.
 
-### 🧠 UEBA Behaviour Baseline
+###  UEBA Behaviour Baseline
 30-day behavioural baseline per employee. Tracks login hours, record access volume, known devices, known locations. Deviations trigger risk scoring.
 
-### 📊 Risk Score Engine
+###  Risk Score Engine
 ```
 Night login (10PM–5AM)     → +20 points
 USB device connected        → +25 points  
@@ -58,7 +58,7 @@ Privilege escalation        → +10 points
 Honeypot accessed           → = 100 (CRITICAL instantly)
 ```
 
-### 🤖 LLM Investigation Agent
+###  LLM Investigation Agent
 Vendor-independent AI analyst. Reads all signals and generates a structured 3-section report:
 - **What happened** (exact timestamps + numbers)
 - **Why it's suspicious** (vs 30-day baseline)
@@ -66,64 +66,25 @@ Vendor-independent AI analyst. Reads all signals and generates a structured 3-se
 
 Switch between Claude → OpenAI → Gemini → on-premise Llama in 1 line.
 
-### 🕸 Collusion Detection
+###  Collusion Detection
 Identifies 2+ employees coordinating on the same restricted resource. Maps to MITRE ATT&CK TA0008 Lateral Movement. Catches the PNB-style multi-employee fraud pattern.
 
-### 🔒 SOC-Gated Freeze
+###  SOC-Gated Freeze
 No automatic employee suspension. 6-step checklist → SOC approve → CISO action → MD dual authorization. Human always in the loop.
 
-### 🛡 5-Layer CISO Protection
+###  5-Layer CISO Protection
 *What if the CISO himself is corrupt?*
 1. CISO has own UEBA risk profile in PRAHARI
 2. CISO alerts bypass to MD + Board directly
 3. Immutable audit log — CISO cannot delete entries
 4. Dual authorization required for all critical actions
 5. Auto RBI reports — CISO cannot block submission
-
----
-
-## 🏗 Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    INPUT LAYER                               │
-│  CBS Logs  │  SWIFT Logs  │  HRMS  │  Auth/VPN  │  USB      │
-└────────────────────────┬────────────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│              SIEM / Log Collection (ELK / Splunk)            │
-│                   1M+ events/day                             │
-└────────────────────────┬────────────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  PRAHARI AI ENGINE                           │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐  │
-│  │ UEBA Baseline│  │   Anomaly    │  │    Collusion     │  │
-│  │  (30-day)    │  │  Detection   │  │    Detection     │  │
-│  └──────────────┘  └──────────────┘  └──────────────────┘  │
-└────────────────────────┬────────────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│              HONEYPOT DECEPTION LAYER                        │
-│         Decoy files → any access = instant CRITICAL          │
-└────────────────────────┬────────────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│              LLM INVESTIGATION AGENT                         │
-│    Claude / OpenAI / Gemini / Llama — vendor-independent     │
-└────────────────────────┬────────────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   SOC DASHBOARD                              │
-│  Alert Feed │ Investigation │ SOC Freeze │ RBI Report        │
-└────────────────────────┬────────────────────────────────────┘
-                         ▼
+         ▼
      Employee → CISO → MD → Board → RBI → CBI
-```
 
----
 
-## 🛠 Tech Stack
+
+## Tech Stack
 
 | Layer | Technology | Why |
 |-------|-----------|-----|
@@ -135,9 +96,9 @@ No automatic employee suspension. 6-step checklist → SOC approve → CISO acti
 | Mock Data | Faker.js patterns | Realistic Indian bank employee data |
 | Compliance | Built-in tagging | RBI CSF 2016, ISO 27001, CERT-In, DPDP |
 
----
 
-## 🚀 Quick Start
+
+## Quick Start
 
 ### Prerequisites
 - Node.js v20+
@@ -194,12 +155,12 @@ npm start
 
 | Role | Password | Access |
 |------|----------|--------|
-| 🛡 CISO | `ciso123` | 7 tabs — employee monitoring, investigate, freeze |
-| 👑 MD | `md123` | 8 tabs — all CISO tabs + RBI Reports |
+| CISO | `ciso123` | 7 tabs — employee monitoring, investigate, freeze |
+| MD | `md123` | 8 tabs — all CISO tabs + RBI Reports |
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Prahari/
@@ -224,7 +185,7 @@ Prahari/
 
 ---
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -245,12 +206,12 @@ Prahari/
 
 ---
 
-## 🧪 Demo Walkthrough
+##  Demo Walkthrough
 
 1. **Login as CISO** (`ciso123`)
 2. **Dashboard** → See 10 employees ranked by risk score
 3. **Click "SIMULATE ATTACK"** → Raj Kumar turns CRITICAL (100/100)
-4. **See** → 🪤 TRAP HIT badge + MITRE TA0009 tag
+4. **See** →  TRAP HIT badge + MITRE TA0009 tag
 5. **Click Raj Kumar** → See 30-day trajectory (12 → 45 → 100)
 6. **Click "Investigate"** → LLM generates 3-section report
 7. **Click "Freeze"** → 6-checkbox SOC protocol
@@ -260,7 +221,7 @@ Prahari/
 
 ---
 
-## 📊 Risk Score Formula
+##  Risk Score Formula
 
 ```python
 def calculate_risk_score(employee):
@@ -280,7 +241,7 @@ def calculate_risk_score(employee):
 
 ---
 
-## 🛡 Compliance Coverage
+##  Compliance Coverage
 
 | Framework | Coverage |
 |-----------|----------|
@@ -292,7 +253,7 @@ def calculate_risk_score(employee):
 
 ---
 
-## 🔮 Future Roadmap
+##  Future Roadmap
 
 - **Phase 2**: XGBoost ML model + Apache Kafka real-time streaming
 - **Phase 3**: Graph Neural Network for collusion + on-premise Llama
@@ -300,7 +261,7 @@ def calculate_risk_score(employee):
 
 ---
 
-## 👥 Team
+##  Team
 
 **Tech Matriarchs** — FinSpark '26
 
@@ -313,7 +274,7 @@ def calculate_risk_score(employee):
 
 ---
 
-## 📄 License
+##  License
 
 MIT License — see [LICENSE](LICENSE) for details.
 
