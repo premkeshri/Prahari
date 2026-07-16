@@ -1,4 +1,4 @@
-#── PRAHARI MITRE ATT&CK Auto-Mapping ──
+
  
 MITRE_MAP = {
     "night_login": {
@@ -93,7 +93,7 @@ def get_mitre_details(signal):
     return MITRE_MAP.get(signal, None)
  
  
-# ── Test ──
+
 if __name__ == "__main__":
     test_breakdown = {
         "night_login": 20,
