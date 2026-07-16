@@ -1,4 +1,4 @@
-# ── PRAHARI Compliance Tags — RBI + ISO + CERT-In ──
+
  
 COMPLIANCE_MAP = {
     "CRITICAL": [
@@ -48,7 +48,6 @@ def get_full_compliance_report(severity, mitre_tags):
     }
  
  
-# ── Test ──
 if __name__ == "__main__":
     print("── PRAHARI Compliance Tags Test ──\n")
     for severity in ["CRITICAL", "ALERT", "WATCH", "NORMAL"]:
