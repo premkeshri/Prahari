@@ -1,7 +1,7 @@
 
 import json
  
-# ── PRAHARI Risk Score Engine ──
+
  
 def calculate_risk_score(employee):
     """
@@ -14,7 +14,7 @@ def calculate_risk_score(employee):
     events = employee.get("access_events", [])
     context = employee.get("context_signals", [])
  
-    # ── Signal 1: Night login (10PM - 5AM) ──
+  
     for event in events:
         time_str = event.get("time", "")
         if time_str:
@@ -25,14 +25,14 @@ def calculate_risk_score(employee):
                     score += 20
                 break
  
-    # ── Signal 2: USB connected ──
+    
     for event in events:
         if "usb" in event.get("action", "").lower():
             breakdown["usb_connected"] = 25
             score += 25
             break
  
-    # ── Signal 3: Bulk export (500+ records) ──
+    
     total_records = sum(e.get("records", 0) for e in events)
     avg = employee.get("avg_records_per_day", 50)
     if total_records > avg * 5:
@@ -42,7 +42,7 @@ def calculate_risk_score(employee):
         breakdown["above_avg_records"] = 10
         score += 10
  
-    # ── Signal 4: Unknown / rare location ──
+    
     known_locs = employee.get("known_locations", [])
     for event in events:
         loc = event.get("location", "")
@@ -51,7 +51,7 @@ def calculate_risk_score(employee):
             score += 15
             break
  
-    # ── Signal 5: Privilege escalation ──
+   
     for event in events:
         action = event.get("action", "").lower()
         if "privilege" in action or "admin" in action or "escalat" in action:
@@ -59,13 +59,13 @@ def calculate_risk_score(employee):
             score += 10
             break
  
-    # ── Signal 6: Honeypot accessed ──
+   
     if employee.get("honeypot_accessed"):
         breakdown["honeypot_accessed"] = 100
         score = 100  # Override to 100 instantly
         return min(score, 100), breakdown
  
-    # ── Signal 7: Employee context signals ──
+    
     context_weights = {
         "show_cause_notice":        15,
         "official_grievance":       10,
@@ -81,7 +81,7 @@ def calculate_risk_score(employee):
             breakdown[signal] = w
             score += w
  
-    # ── Signal 8: Low confidence login boosts risk ──
+    
     conf = employee.get("confidence_score", 100)
     if conf < 50:
         breakdown["low_confidence_login"] = 15
@@ -100,7 +100,7 @@ def calculate_confidence_score(login_event, employee):
     score = 0
     breakdown = {}
  
-    # Factor 1: Known device
+   
     known_devices = employee.get("known_devices", [])
     device = login_event.get("device", "")
     if device in known_devices:
@@ -109,7 +109,7 @@ def calculate_confidence_score(login_event, employee):
     else:
         breakdown["known_device"] = 0
  
-    # Factor 2: Office / known network
+    
     location = login_event.get("location", "")
     known_locs = employee.get("known_locations", [])
     if location in known_locs:
@@ -118,7 +118,6 @@ def calculate_confidence_score(login_event, employee):
     else:
         breakdown["office_network"] = 0
  
-    # Factor 3: Normal working hours
     time_str = login_event.get("time", "09:00")
     hour = int(time_str.split(":")[0])
     normal_start, normal_end = employee.get("normal_login_hours", [9, 18])
@@ -131,14 +130,13 @@ def calculate_confidence_score(login_event, employee):
     else:
         breakdown["normal_hours"] = 0
  
-    # Factor 4: Known location
+   
     if location in known_locs:
         breakdown["known_location"] = 20
         score += 20
     else:
         breakdown["known_location"] = 0
  
-    # Factor 5: Behaviour match (records within 2x average)
     records = login_event.get("records", 0)
     avg = employee.get("avg_records_per_day", 50)
     if records <= avg * 2:
@@ -176,7 +174,6 @@ def get_severity_color(severity):
     return colors.get(severity, "green")
  
  
-# ── Test the score engine ──
 if __name__ == "__main__":
     with open("employees.json") as f:
         data = json.load(f)
