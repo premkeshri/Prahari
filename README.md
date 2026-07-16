@@ -98,68 +98,6 @@ No automatic employee suspension. 6-step checklist → SOC approve → CISO acti
 
 
 
-## Quick Start
-
-### Prerequisites
-- Node.js v20+
-- Python 3.12+
-- Git
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/premkeshri/Prahari.git
-cd Prahari
-```
-
-### Backend Setup
-
-```bash
-cd backend
-
-# Create virtual environment
-python -m venv venv
-
-# Activate (Windows)
-venv\Scripts\activate
-
-# Activate (Mac/Linux)
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Generate mock data
-python generate_data.py
-
-# Start backend
-python app.py
-# → Running on http://localhost:5000
-```
-
-### Frontend Setup
-
-```bash
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start frontend
-npm start
-# → Running on http://localhost:3000
-```
-
-### Demo Login
-
-| Role | Password | Access |
-|------|----------|--------|
-| CISO | `ciso123` | 7 tabs — employee monitoring, investigate, freeze |
-| MD | `md123` | 8 tabs — all CISO tabs + RBI Reports |
-
----
-
 ##  Project Structure
 
 ```
@@ -274,16 +212,8 @@ def calculate_risk_score(employee):
 
 ---
 
-##  License
 
-MIT License — see [LICENSE](LICENSE) for details.
-
----
 
 <div align="center">
 
-**PRAHARI v2.0** · FinSpark '26 · Bank of Maharashtra
 
-*Detect. Alert. Protect.*
-
-</div>
